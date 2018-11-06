@@ -55,7 +55,7 @@ public static void main(String[] args) throws Exception{
         model.setValue(50);
         model.setStepSize(10);
         spinner.setModel(model);
-        
+}
     public NewJFrame() {
         initComponents();
     }
