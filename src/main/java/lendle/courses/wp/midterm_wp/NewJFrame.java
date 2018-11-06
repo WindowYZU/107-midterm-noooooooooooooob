@@ -5,18 +5,31 @@
  */
 package lendle.courses.wp.midterm_wp;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.StringStack;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
+import static java.util.Collections.list;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.AccessibleAttribute;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.ProgressMonitor;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -25,10 +38,24 @@ import javax.swing.SwingUtilities;
 public class NewJFrame extends javax.swing.JFrame {
 
     static ProgressDialog progress = null;
-
+public static void main(String[] args) throws Exception{
     /**
      * Creates new form NewJFrame
      */
+        JFrame frame = new JFrame();
+        frame.setSize(300, 300);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+        JSpinner spinner=new JSpinner();
+        
+        //create a SpinnerDateModel
+        SpinnerNumberModel model=new SpinnerNumberModel();
+        model.setMaximum(100);
+        model.setMinimum(0);
+        model.setValue(50);
+        model.setStepSize(10);
+        spinner.setModel(model);
+        
     public NewJFrame() {
         initComponents();
     }
@@ -51,7 +78,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "https://mbtskoudsalg.com/images/png-image-7.png", "http://pngimg.com/uploads/eagle/eagle_PNG1227.png", "https://upload.wikimedia.org/wikipedia/commons/4/4a/Photographer_Barnstar.png", "http://pluspng.com/img-png/bulb-hd-png-light-bulb-png-transparent-image-2048.png", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "https://mbtskoudsalg.com/images/png-image-7.png", "http://pngimg.com/uploads/eagle/eagle_PNG1227.png", "https://upload.wikimedia.org/wikipedia/commons/4/4a/Photographer_Barnstar.png", "http://pluspng.com/img-png/bulb-hd-png-light-bulb-png-transparent-image-2048.png", "" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(jList1);
 
@@ -116,9 +148,18 @@ public class NewJFrame extends javax.swing.JFrame {
                     //implement this
                     if (finished) {
                         progress.setVisible(false);
-                        jButton1.setEnabled(true);
+                        jButton1.setEnabled(true); {
                         //將下載好的項目加入到 jList 裡面
+                        JFrame frame=new JFrame();
+                        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                        frame.setLayout(new BorderLayout());
+                        JList List=new JList(new String[]{"a","b","c","d"});
+                        Component list = null;
+                        JScrollPane scroll=new JScrollPane(list);
+                        frame.add(scroll);
                         
+                        frame.setVisible(true);
+                    }
                         ////////////////////////////
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
@@ -146,6 +187,14 @@ public class NewJFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        String item=(String) jComboBox1.getSelectedItem();
+        DefaultListModel model=(DefaultListModel) jList1.getModel();
+        model.addElement(item);
+        jList1.updateUI();                  
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
